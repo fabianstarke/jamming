@@ -8,7 +8,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: [],
+      searchResults: [{
+        name: "Song",
+        artist: "Artist",
+        album: "Album", id: "ID",
+      }],
       playlistName:  "playlist",
       playlistTracks: [],
     }
@@ -46,7 +50,7 @@ class App extends Component {
             <SearchResults searchResults={this.state.searchResults}/>
             <PlayList
             playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks}
-            onRemove={this.removeTrack}
+            onRemove={this.onRemove}
             onNameChange={this.updatePlaylistName}/>
           </div>
         </div>
