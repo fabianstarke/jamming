@@ -15,6 +15,7 @@ export const Spotify = {
       const expiresIn = Number(newExpiresIn[1]);
       window.setTimeout(() => accessToken = '', expiresIn * 1000);
       window.history.pushState('Access Token', null, '/');
+      return accessToken
     }
     else{
      window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&&redirect_uri=${redirectUri}&scope=playlist-modify-public`;
@@ -22,7 +23,8 @@ export const Spotify = {
  },
 
  search(term) {
-     return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,
+    const accessToken = Spotify.getAccessToken();
+     return fetch(`https://cors-anywhere.herokuapp.com/https://api.spotify.com/v1/search?type=track&q=${term}`,
          {headers: {Authorization: `Bearer ${accessToken}`}})
        .then(response => response.json())
        .then(jsonResponse => {
